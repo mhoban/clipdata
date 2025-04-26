@@ -1,0 +1,4 @@
+{
+  "exiftool": "/opt/homebrew/bin/exiftool",
+  "rscript": "/usr/local/bin/Rscript"
+}
