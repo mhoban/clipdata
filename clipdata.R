@@ -77,9 +77,6 @@ if (exists('debug_args')) {
     opt_args <- commandArgs(TRUE)
 }
 
-write_lines(opt_args,"debug.log")
-
-
 # parse command-line options
 opt <- parse_args2(
     OptionParser(
