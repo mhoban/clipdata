@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript
+#!/usr/local/env Rscript
 
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(purrr))
@@ -11,9 +11,6 @@ suppressPackageStartupMessages(library(optparse))
 
 # make an error function that doesn't show code
 bail <- function(...) stop(...,call. = FALSE)
-
-# glue cat
-gcat <- function(...) cat(str_glue(...))
 
 # quieten things down a bit
 options(
@@ -79,6 +76,8 @@ if (exists('debug_args')) {
 } else {
     opt_args <- commandArgs(TRUE)
 }
+
+write_lines(opt_args,"debug.log")
 
 
 # parse command-line options
@@ -194,7 +193,7 @@ writer <- switch(
   \(a,b) bail(str_glue("Unable to determine the file format of `{b}`."))
 )
 writer(clip_summary,opt$options$output)
-gcat("Saved video metadata to {opt$options$output}\n")
+cat(str_glue("Saved video metadata to {opt$options$output}\n"))
 
 if (opt$options$rename) {
   dirs <- path_dir(clip_summary$path)
@@ -219,6 +218,5 @@ if (opt$options$save_profile) {
         mutate(lat = round(map_dbl(lat,ddeg),5), lon = round(map_dbl(lon,ddeg),5)) %>%
         select(dive,time=timestamp,depth,temp,lat,lon) %>%
         write_csv(f)
-      gcat("Saved dive profile for {grp$path} to {f}")
     })
 }

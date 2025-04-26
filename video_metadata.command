@@ -10,6 +10,7 @@ function yn {
   done
 }
 
+cd /Users/pristineseas/Documents/clipdata
 
 exiftool=$(which exiftool)
 if [[ -z "$exiftool" ]]; then
@@ -17,8 +18,8 @@ if [[ -z "$exiftool" ]]; then
   exit 1
 fi
 
-read -p 'Drag qinsy file here and then hit enter:' qinsy
-read -a vids -p 'Select all video files, drag them here, and then hit enter: ' 
+read -p 'Drag qinsy file here and then hit enter: ' qinsy
+read -p 'Drag directory containing video files here and hit enter: ' vids
 read -p 'Enter qinsy file time offset in hh:mm:ss format (hit enter for no offset): ' qinsy_offset
 read -p 'Enter video file time offset in hh:mm:ss format (hit enter for no offset): ' video_offset
 yn "Save dive profiles for each video?" && profile="-p" || profile=""
@@ -26,8 +27,4 @@ yn "Save dive profiles for each video?" && profile="-p" || profile=""
 qinsy_offset=${qinsy_offset:-"00:00:00"}
 video_offset=${video_offset:-"00:00:00"}
 
-./clipdata.R --qinsy-offset "$qinsy_offset" --video-offset "$video_offset" $profile "$qinsy" "${vids[@]}"
-
-
-
-
+ ./clipdata.R --output "${vids}/video_metadata.csv" --qinsy-offset "$qinsy_offset" --video-offset "$video_offset" $profile "$qinsy" "$vids"/*.MOV
