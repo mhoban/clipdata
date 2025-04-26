@@ -212,8 +212,8 @@ if (opt$options$save_profile) {
     group_walk(\(data,grp) {
       f <- path_ext_set(grp$path,"profile.csv")
       data %>%
-        mutate(lat = round(map_dbl(lat,ddeg),5), lon = round(map_dbl(lon,ddeg),5)) %>%
-        select(dive,time=timestamp,depth,temp,lat,lon) %>%
+        mutate(file = path_file(grp$path),lat = round(map_dbl(lat,ddeg),5), lon = round(map_dbl(lon,ddeg),5)) %>%
+        select(file,dive,time=timestamp,depth,temp,lat,lon) %>%
         write_csv(f)
     })
 }
