@@ -1,4 +1,5 @@
 {
   "exiftool": "/opt/homebrew/bin/exiftool",
-  "rscript": "/usr/local/bin/Rscript"
+  "rscript": "/usr/local/bin/Rscript",
+  "configured": false
 }
