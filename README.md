@@ -145,6 +145,44 @@ Under the hood, this tool just launches an `R` script called `clipdata.R`. If yo
 
 To run the tool in `RStudio`, uncomment lines 89–114 in `clipdata.R` and modify the `script_args` variable to include the necessary info (time offsets, exiftool location, timezone, output filename, qinsy file, video file location, etc.). The code comments should explain where and how to edit those options. Then, you can just run the whole file (cmd+shift+enter on Mac), and it will retrieve and save all your video metadata.
 
+You can also run `clipdata.R` directly from the command line. To see its options, do:
+
+```console
+$ ./clipdata.R --help
+Usage: clipdata.R [options] <qinsy_file> <video_dir>
+
+Options:
+  -q QINSY-OFFSET, --qinsy-offset=QINSY-OFFSET
+    Offset ([+/-]hh:mm:ss) to modify dive time [default: 00:00:00]
+
+  -v VIDEO-OFFSET, --video-offset=VIDEO-OFFSET
+    Offset ([+/-]hh:mm:ss) to modify video time [default: 00:00:00]
+
+  -g VIDEO-GLOB, --video-glob=VIDEO-GLOB
+    Glob (wildcard) to specify video files (must be quoted if passing in the shell)
+
+  -t TIMEZONE, --timezone=TIMEZONE
+    Timezone of video/qinsy times (in Olson/tz format), blank is computer's local timezone
+
+  -x EXIFTOOL, --exiftool=EXIFTOOL
+    Path to exiftool executable [default: exiftool]
+
+  -r, --rename
+    Rename video files [default: FALSE]
+
+  -p, --save-profile
+    Save dive profile data for each video file [default: FALSE]
+
+  -F RENAME-FORMAT, --rename-format=RENAME-FORMAT
+    Video file renaming format string [default: %f_%d]
+
+  -o OUTPUT, --output=OUTPUT
+    Output filename [default: video_metadata.csv]
+
+  -h, --help
+    Show this help message and exit
+```
+
 # Metadata output
 
 This tool produces two types of output files, which are created in the directory where your video files live: a summary metadata file and per-clip dive profiles. GPS points are given in decimal degrees (rather than that annoying degrees-decimal minutes format that so many things seem to love to use) and dates/times are recorded in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. **Note that unless you've specified otherwise, we assume that the computer you're running this tool on is in the same timezone as the sub was when it dove.** For more info on timezones, [see below](#a-note-on-timezones)

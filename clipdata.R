@@ -1,4 +1,4 @@
-#!/usr/local/env Rscript
+#!/usr/bin/env Rscript
 
 # if you're running this in Rstudio and it's the first time, uncomment and run the next line:
 # renv::restore()
@@ -282,3 +282,4 @@ if (opt$options$save_profile) {
         write_csv(f)
     })
 }
+
