@@ -76,6 +76,9 @@ function write_file(text, file) {
         withTitle: 'Rscript executable path',
       }
     ).textReturned;
+    if (!file_exists(config.rscript)) {
+      die(`The file ${config.rscript} does not exist.`)
+    }
 
     var ext = config.exiftool;
     try {
@@ -90,6 +93,9 @@ function write_file(text, file) {
         withTitle: 'exiftool executable path',
       }
     ).textReturned;
+    if (!file_exists(config.exiftool)) {
+      die(`The file ${config.exiftool} does not exist.`)
+    }
 
     config.timezone = app.displayDialog(
       "Enter the timezone where sub dives took place\n(Ex: Pacific/Funafuti. Leave blank for current local timezone)", {

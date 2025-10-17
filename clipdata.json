@@ -1,5 +1,5 @@
 {
-  "exiftool": "/opt/homebrew/bin/exiftool",
+  "exiftool": "/usr/local/bin/exiftool",
   "rscript": "/usr/local/bin/Rscript",
   "timezone": "",
   "configured": false
