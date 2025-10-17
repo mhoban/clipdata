@@ -62,7 +62,11 @@ function write_file(text, file) {
 
   if (!config.configured) {
     config.configured = true;
-    var rsc = app.doShellScript('which Rscript');
+    var rsc = config.rscript;
+    try {
+      app.doShellScript('which Rscript');
+    } catch(e) {}
+
     config.rscript = app.displayDialog(
       'Verify path to Rscript executable', {
         defaultAnswer: rsc != "" ? rsc : config.rscript,
@@ -73,7 +77,10 @@ function write_file(text, file) {
       }
     ).textReturned;
 
-    var ext = app.doShellScript('which exiftool');
+    var ext = config.exiftool;
+    try {
+      app.doShellScript('which exiftool');
+    } catch(e) {}
     config.exiftool = app.displayDialog(
       'Verify path to exiftool executable', {
         defaultAnswer: ext != "" ? ext : config.exiftool,
